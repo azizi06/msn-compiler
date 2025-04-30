@@ -1,1 +1,1 @@
-gcc -o msn analyseur_syntaxique.c analyseur_lexical.c main.c -Wall -Wextra -pedantic -ggdb
+gcc -o msn lexime.c analyseur_syntaxique.c analyseur_lexical.c main.c -Wall -Wextra -pedantic -ggdb
