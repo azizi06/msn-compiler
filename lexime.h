@@ -9,6 +9,7 @@
 #define LEXEME_SIZE  50
 #define BUFFER_SIZE  256
 
+<<<<<<< Updated upstream
 // === CODES LEXICAUX POUR CHAQUE TYPE DE LEXÈME (uniformisés)
 
 // Mots-clés
@@ -61,6 +62,12 @@ typedef struct Unite_Lexicale {
     char Lexeme[LEXEME_SIZE];   // Le texte du lexème (ex: "do", "++", "var1", "5")
     int Code;                   // Le code lexical défini ci-dessus
     int Ligne;                  // Numéro de ligne dans le fichier source
+=======
+typedef struct Unite_Lexicale { 
+    char   Lexeme[LEXEME_SIZE]; 
+    int    Code; 
+    int    Ligne; 
+>>>>>>> Stashed changes
     struct Unite_Lexicale* Suivant; 
 } UL;
 
@@ -79,5 +86,6 @@ ULPile* push_ul(ULPile *root, char* lexeme, int code, int ligne);  // empiler
 ULPile* pop_ul(ULPile *root);                                      // dépiler
 void aff_ulPile(ULPile *root);
 void free_ulPile(ULPile *root);
+// ---------------------------------
 
 #endif
