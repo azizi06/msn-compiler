@@ -1,0 +1,4 @@
+do {
+    // Incrémentation de i
+    i++;
+} while (i < 3);  // Tant que i est inférieur à 3
