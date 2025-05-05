@@ -39,40 +39,43 @@ void ajouter_token(UL **root, const char *lexeme, int code, int ligne);
 // Codes pour chaque type de lexème
 #define CODE_DO        100
 #define CODE_WHILE     101
-#define CODE_IDF       102
-#define CODE_INT_CONST 103
-#define CODE_PV        104
-#define CODE_INCR      105
-#define CODE_INF       106
+#define CODE_ID        102
+#define CODE_INT_CONST     103
+#define CODE_PV        104  // ;
+
+//#define CODE_INCR      105
+//#define CODE_INF       106
 #define CODE_STRING    107
-#define CODE_EQ        108
-#define CODE_NEQ       109
-#define CODE_AND       110
-#define CODE_OR        111
-#define CODE_FOR       112
-#define CODE_IF        113
-#define CODE_RETURN    114
-#define CODE_INT       115
-#define CODE_PLUS      116
-#define CODE_DELIM     117
-#define CODE_PAR       118
-
-#define PLUSPLUS    5  // ++
-#define EGAL        19 // ==
-#define AFF         11 // =
-#define PLUS 21  // Code pour l'opérateur '+'
-
-#define CODE_AFFECT 120  // =
-
-#define MINUSMINUS 6
-#define MINUS 7
-#define SUP 8
+// operations logiques :
+#define CODE_EQ        108 // ==
+#define CODE_NEQ       109 // !=
+#define CODE_AND       110  // &&
+#define CODE_OR        111   // ||
+// 
+#define CODE_CHAR       112 // char
+#define CODE_INT        113 // int
+#define CODE_PRINTF    114 // printf
+#define CODE_RETURN      115  // return
+//#define CODE_PLUS      116
+#define CODE_ACCOLADE_OUVRANTE     117  // {
+#define CODE_ACCOLADE_FERMANTE       118 // }
+#define CODE_PARENTHESE_OUVRANTE 119 // (
+#define CODE_PARENTHESE_FERMANTE 120 //  )
+#define CODE_AFFECTATION 121  // =
+// codes operations :
+#define PLUS 50  // Code pour l'opérateur '+'
+#define PLUSPLUS  51      // ++
+#define MINUS 52     // 
+#define MINUSMINUS 53  // --
+#define DEVIDE 54      //  /
+#define MULTIPLY 55 // *
+#define SUP    60  //  >
+#define INF 61        // <
 
 
 // Définir les codes pour les symboles
 #define CODE_MODULO 130  // Code pour le symbole '%'
-#define CODE_VIRGULE 131  // Code pour la virgule
-// Définir le code pour le caractère '.'
+#define CODE_VIRGULE 131  // Code pour la virgule ,
 #define CODE_POINT 132  // Code pour le symbole '.'
 
 
@@ -81,15 +84,15 @@ void ajouter_token(UL **root, const char *lexeme, int code, int ligne);
 
 
 
-#define FIN_SUITE_UL           999
+#define FIN_SUITE_UL           999 // #
 #define ERREUR                 -1
 
 
 // === Liste des mots-clés à reconnaître
 #define DO_KEYWORD     "do"
 #define WHILE_KEYWORD  "while"
-#define IF_KEYWORD     "if"
-#define FOR_KEYWORD    "for"
+#define CHAR_KEYWORD     "char"
+//#define FOR_KEYWORD    "for"
 #define RETURN_KEYWORD "return"
 #define INT_KEYWORD    "int"
 

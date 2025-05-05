@@ -1,4 +1,5 @@
 do {
-    // Incrémentation de i
-    i++;
-} while (i < 3);  // Tant que i est inférieur à 3
+   print ;
+   char a = 9 ;
+   int r = 8;
+} while (i < 3;  // Tant que i est inférieur à 3

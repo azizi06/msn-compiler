@@ -131,16 +131,16 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
               root = inserer_fin(root, buffer, CODE_DO, ligne);
           else if (strcmp(buffer, WHILE_KEYWORD) == 0)
               root = inserer_fin(root, buffer, CODE_WHILE, ligne);
-          else if (strcmp(buffer, IF_KEYWORD) == 0)
-              root = inserer_fin(root, buffer, CODE_IF, ligne);
-          else if (strcmp(buffer, FOR_KEYWORD) == 0)
-              root = inserer_fin(root, buffer, CODE_FOR, ligne);
+          else if (strcmp(buffer, INT_KEYWORD) == 0)
+              root = inserer_fin(root, buffer, INT_KEYWORD, ligne);
+          else if (strcmp(buffer, CHAR_KEYWORD) == 0)
+              root = inserer_fin(root, buffer, CHAR_KEYWORD, ligne);
           else if (strcmp(buffer, RETURN_KEYWORD) == 0)
               root = inserer_fin(root, buffer, CODE_RETURN, ligne);
           else if (strcmp(buffer, INT_KEYWORD) == 0)
               root = inserer_fin(root, buffer, CODE_INT, ligne);
           else
-              root = inserer_fin(root, buffer, CODE_IDF, ligne); // Identifiant
+              root = inserer_fin(root, buffer, CODE_ID, ligne); // Identifiant
 
           continue;
       }
@@ -208,7 +208,7 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
 
       // Gestion des autres opérateurs et symboles
       if (current == '<') {
-          root = inserer_fin(root, "<", CODE_INF, ligne);
+          root = inserer_fin(root, "<", INF, ligne);
           i++;
           continue;
       }
@@ -219,19 +219,33 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
           continue;
       }
 
-      if (current == '{' || current == '}') {
-          char tmp[2] = {current, '\0'};
-          root = inserer_fin(root, tmp, CODE_DELIM, ligne);
+      if (current == '{' ) {
+          
+          root = inserer_fin(root, "{", CODE_ACCOLADE_OUVRANTE, ligne);
           i++;
           continue;
       }
 
-      if (current == '(' || current == ')') {
-          char tmp[2] = {current, '\0'};
-          root = inserer_fin(root, tmp, CODE_PAR, ligne);
+      if (current == '}' ) {
+          
+        root = inserer_fin(root, "}", CODE_ACCOLADE_OUVRANTE, ligne);
+        i++;
+        continue;
+    }
+
+
+      if (current == '(') {
+         
+          root = inserer_fin(root, "(", CODE_PARENTHESE_OUVRANTE, ligne);
           i++;
           continue;
       }
+      if (current == ')') {
+         
+        root = inserer_fin(root, ")", CODE_PARENTHESE_OUVRANTE, ligne);
+        i++;
+        continue;
+    }
 
       if (phrase[i] == '=' && phrase[i+1] == '=') {
           root = inserer_fin(root, EQ_OPERATOR, CODE_EQ, ligne);
@@ -246,7 +260,7 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
       }
 
       if (phrase[i] == '=') {
-        root = inserer_fin(root, "=", CODE_AFFECT, ligne);  // CODE_AFFECT à définir si nécessaire
+        root = inserer_fin(root, "=", CODE_AFFECTATION, ligne);  // CODE_AFFECT à définir si nécessaire
         i++;
         continue;
       }
