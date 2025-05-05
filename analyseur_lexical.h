@@ -35,74 +35,74 @@ void ajouter_token(UL **root, const char *lexeme, int code, int ligne);
 #define Q3  3
 #define Q4  4
 
-// === Codes symboliques pour les lexèmes
-// Codes pour chaque type de lexème
-#define CODE_DO        100
-#define CODE_WHILE     101
-#define CODE_ID        102
-#define CODE_INT_CONST     103
-#define CODE_PV        104  // ;
+// === Symbolic Codes for Lexemes (Terminals) ===
 
-//#define CODE_INCR      105
-//#define CODE_INF       106
-#define CODE_STRING    107
-// operations logiques :
-#define CODE_EQ        108 // ==
-#define CODE_NEQ       109 // !=
-#define CODE_AND       110  // &&
-#define CODE_OR        111   // ||
-// 
-#define CODE_CHAR       112 // char
-#define CODE_INT        113 // int
-#define CODE_PRINTF    114 // printf
-#define CODE_RETURN      115  // return
-//#define CODE_PLUS      116
-#define CODE_ACCOLADE_OUVRANTE     117  // {
-#define CODE_ACCOLADE_FERMANTE       118 // }
-#define CODE_PARENTHESE_OUVRANTE 119 // (
-#define CODE_PARENTHESE_FERMANTE 120 //  )
-#define CODE_AFFECTATION 121  // =
-// codes operations :
-#define PLUS 50  // Code pour l'opérateur '+'
-#define PLUSPLUS  51      // ++
-#define MINUS 52     // 
-#define MINUSMINUS 53  // --
-#define DEVIDE 54      //  /
-#define MULTIPLY 55 // *
-#define SUP    60  //  >
-#define INF 61        // <
+// --- Keywords ---
+#define CODE_DO                  100  // "do"
+#define CODE_WHILE               101  // "while"
+#define CODE_INT                 102  // "int"
+#define CODE_CHAR                103  // "char"
+#define CODE_RETURN              104  // "return"
 
+// --- Identifiers & Constants ---
+#define CODE_ID                  105  // identifier
+#define CODE_INT_CONST           106  // integer constant
+#define CODE_STRING              107  // string literal
 
-// Définir les codes pour les symboles
-#define CODE_MODULO 130  // Code pour le symbole '%'
-#define CODE_VIRGULE 131  // Code pour la virgule ,
-#define CODE_POINT 132  // Code pour le symbole '.'
+// --- Delimiters ---
+#define CODE_PV                  108  // ;
+#define CODE_ACCOLADE_OUVRANTE   109  // {
+#define CODE_ACCOLADE_FERMANTE   110  // }
+#define CODE_PARENTHESE_OUVRANTE 111  // (
+#define CODE_PARENTHESE_FERMANTE 112  // )
+#define CODE_AFFECTATION         113  // =
 
+// --- Arithmetic Operators ---
+#define CODE_PLUS                114  // +
+#define CODE_MINUS               115  // -
+#define CODE_MULTIPLY            116  // *
+#define CODE_DIVIDE              117  // /
+#define CODE_PLUSPLUS            118  // ++
+#define CODE_MINUSMINUS          119  // --
 
+// --- Relational Operators ---
+#define CODE_SUP                 120  // >
+#define CODE_INF                 121  // <
+#define CODE_EQ                  122  // ==
+#define CODE_NEQ                 123  // !=
+#define CODE_LEQ                 124  // <=
+#define CODE_GEQ                 125  // >=
 
+// --- Logical Operators ---
+#define CODE_AND                 126  // &&
+#define CODE_OR                  127  // ||
 
+// --- Other Symbols (Optional) ---
+#define CODE_MODULO              128  // %
+#define CODE_VIRGULE             129  // ,
+#define CODE_POINT               130  // .
+#define CODE_EPSILON             131  // ε (internal use)
 
+// --- Special Control Codes ---
+#define FIN_SUITE_UL             999  // #
+#define ERREUR                   -1  // Error code
 
+// --- Keyword Strings for Lexer (if needed) ---
+#define DO_KEYWORD               "do"
+#define WHILE_KEYWORD            "while"
+#define CHAR_KEYWORD             "char"
+#define INT_KEYWORD              "int"
+#define RETURN_KEYWORD           "return"
 
-#define FIN_SUITE_UL           999 // #
-#define ERREUR                 -1
+// --- Operator Strings for Lexer (if needed) ---
+#define AND_OPERATOR             "&&"
+#define OR_OPERATOR              "||"
+#define INC_OPERATOR             "++"
+#define DEC_OPERATOR             "--"
+#define EQ_OPERATOR              "=="
+#define NEQ_OPERATOR             "!="
 
-
-// === Liste des mots-clés à reconnaître
-#define DO_KEYWORD     "do"
-#define WHILE_KEYWORD  "while"
-#define CHAR_KEYWORD     "char"
-//#define FOR_KEYWORD    "for"
-#define RETURN_KEYWORD "return"
-#define INT_KEYWORD    "int"
-
-// === Liste des opérateurs
-#define AND_OPERATOR  "&&"
-#define OR_OPERATOR   "||"
-#define INC_OPERATOR  "++"
-#define DEC_OPERATOR  "--"
-#define EQ_OPERATOR   "=="
-#define NEQ_OPERATOR  "!="
+#define   NUMBER_OF_TERMINALS          34
 
 
 #endif // ANALYSEUR_LEXICAL_H

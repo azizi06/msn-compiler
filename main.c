@@ -33,8 +33,8 @@ int main(int argc, char *argv[]) {
 
     // === Analyseur syntaxique ===
     printf("\n=== Analyseur Syntaxique ===\n");
-
-    if (analyser_do_while(root)) {
+    ULPile* pile = (ULPile*) malloc(sizeof(ULPile));
+    if (analyseur_syntaxique(root,pile) == 0) {
         printf("La structure do-while est syntaxiquement correcte.\n");
     } else {
         printf("Erreur syntaxique dans la structure do-while.\n");

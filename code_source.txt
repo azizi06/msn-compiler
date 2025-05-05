@@ -1,5 +1,5 @@
 do {
-   print ;
+
    char a = 9 ;
    int r = 8;
 } while (i < 3;  // Tant que i est inférieur à 3

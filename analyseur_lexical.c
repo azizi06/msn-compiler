@@ -132,9 +132,9 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
           else if (strcmp(buffer, WHILE_KEYWORD) == 0)
               root = inserer_fin(root, buffer, CODE_WHILE, ligne);
           else if (strcmp(buffer, INT_KEYWORD) == 0)
-              root = inserer_fin(root, buffer, INT_KEYWORD, ligne);
+              root = inserer_fin(root, buffer, CODE_INT, ligne);
           else if (strcmp(buffer, CHAR_KEYWORD) == 0)
-              root = inserer_fin(root, buffer, CHAR_KEYWORD, ligne);
+              root = inserer_fin(root, buffer, CODE_CHAR, ligne);
           else if (strcmp(buffer, RETURN_KEYWORD) == 0)
               root = inserer_fin(root, buffer, CODE_RETURN, ligne);
           else if (strcmp(buffer, INT_KEYWORD) == 0)
@@ -180,26 +180,26 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
       // Vérification des opérateurs d'incrémentation (++)
       if (current == '+') {
           if (phrase[i + 1] == '+') {
-              root = inserer_fin(root, "++", PLUSPLUS, ligne);
+              root = inserer_fin(root, "++", CODE_PLUSPLUS, ligne);
               i += 2;  // Avancer de 2 caractères
           } else {
-              root = inserer_fin(root, "+", PLUS, ligne);
+              root = inserer_fin(root, "+", CODE_PLUS, ligne);
               i++;
           }
           continue;
       }
       if (current == '-') {
         if (phrase[i + 1] == '-') {
-            root = inserer_fin(root, "--", MINUSMINUS, ligne);
+            root = inserer_fin(root, "--", CODE_MINUSMINUS, ligne);
             i += 2;  // Avancer de 2 caractères
         } else {
-            root = inserer_fin(root, "-", MINUS, ligne);
+            root = inserer_fin(root, "-", CODE_MINUS, ligne);
             i++;
         }
         continue;
       }
       if (current == '>') {
-        root = inserer_fin(root, ">", SUP, ligne);
+        root = inserer_fin(root, ">", CODE_SUP, ligne);
         i++;
         continue;
       }
@@ -208,7 +208,7 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
 
       // Gestion des autres opérateurs et symboles
       if (current == '<') {
-          root = inserer_fin(root, "<", INF, ligne);
+          root = inserer_fin(root, "<", CODE_INF, ligne);
           i++;
           continue;
       }

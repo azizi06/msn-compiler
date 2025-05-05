@@ -1,0 +1,27 @@
+<do_while>         ::= "do" "{" <statements> "}" "while" "(" <condition> ")" ";"
+
+<statements>       ::= <statement> <statements> | ε
+
+<statement>        ::= <increment_stmt>
+                     | <decrement_stmt>
+                     | <declare_stmt>
+
+<declare_stmt>     ::= "int" <identifier> "=" <expression> ";"
+                     | "char" <identifier> "=" <string> ";"
+                     | <type> <identifier> ";"
+
+<type>             ::= "int" | "char"
+
+<expression>       ::= <operand> <operation> <operand>
+
+<operation>        ::= "+" | "-" | "*" | "/"
+
+<increment_stmt>   ::= <identifier> "++" ";"
+
+<decrement_stmt>   ::= <identifier> "--" ";"
+
+<condition>        ::= <operand> <rel_op> <operand>
+
+<rel_op>           ::= "==" | "!=" | "<" | ">" | "<=" | ">="
+
+<bool_op>          ::= "&&" | "||"
