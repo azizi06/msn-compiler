@@ -8,8 +8,7 @@
 
 <declare_stmt>     ::= "int" <identifier> "=" <expression> ";"
                         | "char" <identifier> "=" <string> ";"
-                        | <type> <identifier> ";"
-
+                       
 <type>             ::= "int" | "char"
 
 <expression>       ::= <operand> <operation> <operand> | 

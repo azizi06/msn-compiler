@@ -1,3 +1,7 @@
 do {
+   
+    int a = 5;
+    char nom = "azizi"
     ++a;
+    --a;
 } while (i < 3); // Tant que i est inférieur à 3

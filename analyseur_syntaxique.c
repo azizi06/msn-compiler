@@ -31,7 +31,7 @@ static const int RPs[][10] = {
     /*  3 */ { NT_INCREMENT_STMT, -1 },
     /*  4 */ { NT_DECREMENT_STMT, -1 },
     /*  5 */ { NT_DECLARE_STMT, -1 },
-    /*  6 */ { CODE_INT, CODE_ID, CODE_AFFECTATION, NT_EXPRESSION, CODE_PV, -1 },
+    /*  6 */ { CODE_INT, CODE_ID, CODE_AFFECTATION, CODE_INT_CONST, CODE_PV, -1 },
     /*  7 */ { CODE_CHAR, CODE_ID, CODE_AFFECTATION, CODE_STRING, CODE_PV, -1 },
     /*  8 */ { NT_TYPE, CODE_ID, CODE_PV, -1 },
     /*  9 */ { CODE_INT, -1 },
