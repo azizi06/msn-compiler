@@ -135,8 +135,8 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
               root = inserer_fin(root, buffer, CODE_INT, ligne);
           else if (strcmp(buffer, CHAR_KEYWORD) == 0)
               root = inserer_fin(root, buffer, CODE_CHAR, ligne);
-          else if (strcmp(buffer, RETURN_KEYWORD) == 0)
-              root = inserer_fin(root, buffer, CODE_RETURN, ligne);
+/*           else if (strcmp(buffer, RETURN_KEYWORD) == 0)
+              root = inserer_fin(root, buffer, CODE_RETURN, ligne); */
           else if (strcmp(buffer, INT_KEYWORD) == 0)
               root = inserer_fin(root, buffer, CODE_INT, ligne);
           else
@@ -228,7 +228,7 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
 
       if (current == '}' ) {
           
-        root = inserer_fin(root, "}", CODE_ACCOLADE_OUVRANTE, ligne);
+        root = inserer_fin(root, "}", CODE_ACCOLADE_FERMANTE, ligne);
         i++;
         continue;
     }
@@ -242,7 +242,7 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
       }
       if (current == ')') {
          
-        root = inserer_fin(root, ")", CODE_PARENTHESE_OUVRANTE, ligne);
+        root = inserer_fin(root, ")", CODE_PARENTHESE_FERMANTE, ligne);
         i++;
         continue;
     }
@@ -279,12 +279,12 @@ UL *analyseur_lexical(char *phrase, UL *root, SU **err_list) {
           continue;
       }
 
-      // Exemple de gestion des symboles
-      if (current == '%') {
+     
+     /*  if (current == '%') {
         root = inserer_fin(root, "%", CODE_MODULO, ligne);
         i++;  // Avancer d'un caractère
         continue;
-      }
+      }*/
 
       if (current == ',') {
         root = inserer_fin(root, ",", CODE_VIRGULE, ligne);

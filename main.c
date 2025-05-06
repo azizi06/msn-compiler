@@ -34,6 +34,22 @@ int main(int argc, char *argv[]) {
     // === Analyseur syntaxique ===
     printf("\n=== Analyseur Syntaxique ===\n");
     ULPile* pile = (ULPile*) malloc(sizeof(ULPile));
+
+    UL* nlexime = malloc(sizeof(UL));
+    if (!nlexime) {
+        printf("Erreur d'allocation memoire\n");
+        return -1;
+    }
+    nlexime->Code = FIN_SUITE_UL;
+    strncpy(nlexime->Lexeme, "#", strlen("#"));
+    nlexime->Ligne = -2;
+    nlexime->Suivant = NULL;
+    pile->sommet = nlexime;
+    pile ->size = 0;
+    push_ul(pile,"",NT_DO_WHILE,-1);
+
+    aff_ulPile(pile);
+
     if (analyseur_syntaxique(root,pile) == 0) {
         printf("La structure do-while est syntaxiquement correcte.\n");
     } else {

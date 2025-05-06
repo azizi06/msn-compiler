@@ -7,21 +7,23 @@
                      | <declare_stmt>
 
 <declare_stmt>     ::= "int" <identifier> "=" <expression> ";"
-                     | "char" <identifier> "=" <string> ";"
-                     | <type> <identifier> ";"
+                        | "char" <identifier> "=" <string> ";"
+                        | <type> <identifier> ";"
 
 <type>             ::= "int" | "char"
 
-<expression>       ::= <operand> <operation> <operand>
+<expression>       ::= <operand> <operation> <operand> | 
 
 <operation>        ::= "+" | "-" | "*" | "/"
 
-<increment_stmt>   ::= <identifier> "++" ";"
+<increment_stmt>   ::=  "++" <identifier> ";"
 
-<decrement_stmt>   ::= <identifier> "--" ";"
+<decrement_stmt>   ::= "--" <identifier>  ";"
 
 <condition>        ::= <operand> <rel_op> <operand>
 
 <rel_op>           ::= "==" | "!=" | "<" | ">" | "<=" | ">="
 
 <bool_op>          ::= "&&" | "||"
+
+<operand>  ::=  <identifier> | <int_const>

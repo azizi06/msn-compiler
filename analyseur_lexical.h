@@ -40,48 +40,52 @@ void ajouter_token(UL **root, const char *lexeme, int code, int ligne);
 // --- Keywords ---
 #define CODE_DO                  100  // "do"
 #define CODE_WHILE               101  // "while"
-#define CODE_INT                 102  // "int"
-#define CODE_CHAR                103  // "char"
-#define CODE_RETURN              104  // "return"
 
 // --- Identifiers & Constants ---
-#define CODE_ID                  105  // identifier
-#define CODE_INT_CONST           106  // integer constant
-#define CODE_STRING              107  // string literal
+#define CODE_ID                  102  // identifier
+#define CODE_INT                 103  // "int"
+#define CODE_CHAR                104  // "char"
 
 // --- Delimiters ---
-#define CODE_PV                  108  // ;
-#define CODE_ACCOLADE_OUVRANTE   109  // {
-#define CODE_ACCOLADE_FERMANTE   110  // }
-#define CODE_PARENTHESE_OUVRANTE 111  // (
-#define CODE_PARENTHESE_FERMANTE 112  // )
-#define CODE_AFFECTATION         113  // =
+#define CODE_PV                  105  // ;
+#define CODE_ACCOLADE_OUVRANTE   106  // {
+#define CODE_ACCOLADE_FERMANTE   107  // }
+#define CODE_PARENTHESE_OUVRANTE 108  // (
+#define CODE_PARENTHESE_FERMANTE 109  // )
+#define CODE_AFFECTATION         110  // =
 
 // --- Arithmetic Operators ---
-#define CODE_PLUS                114  // +
-#define CODE_MINUS               115  // -
-#define CODE_MULTIPLY            116  // *
-#define CODE_DIVIDE              117  // /
-#define CODE_PLUSPLUS            118  // ++
-#define CODE_MINUSMINUS          119  // --
+#define CODE_PLUS                111  // +
+#define CODE_MINUS               112  // -
+#define CODE_MULTIPLY            113  // *
+#define CODE_DIVIDE              114  // /
+#define CODE_PLUSPLUS            115  // ++
+#define CODE_MINUSMINUS          116  // --
 
 // --- Relational Operators ---
+#define CODE_EQ                  117  // ==
+#define CODE_NEQ                 118  // !=
+#define CODE_INF                 119  // <
 #define CODE_SUP                 120  // >
-#define CODE_INF                 121  // <
-#define CODE_EQ                  122  // ==
-#define CODE_NEQ                 123  // !=
-#define CODE_LEQ                 124  // <=
-#define CODE_GEQ                 125  // >=
+#define CODE_LEQ                 121  // <=
+#define CODE_GEQ                 122  // >=
 
 // --- Logical Operators ---
-#define CODE_AND                 126  // &&
-#define CODE_OR                  127  // ||
+#define CODE_AND                 123  // &&
+#define CODE_OR                  124  // ||
+
+// --- Constants ---
+#define CODE_INT_CONST           125  // integer constant
+#define CODE_STRING              126  // string literal
 
 // --- Other Symbols (Optional) ---
-#define CODE_MODULO              128  // %
-#define CODE_VIRGULE             129  // ,
-#define CODE_POINT               130  // .
-#define CODE_EPSILON             131  // ε (internal use)
+#define CODE_VIRGULE             127  // ,
+#define CODE_POINT               128  // .
+
+// --- Control / Special ---
+#define CODE_EPSILON             129  // ε (internal use)
+#define FIN_SUITE_UL             999  // #
+#define ERREUR                  -1
 
 // --- Special Control Codes ---
 #define FIN_SUITE_UL             999  // #

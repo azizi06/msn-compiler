@@ -22,6 +22,10 @@
 
 #define NUMBER_OF_NON_TERMINALS  13
 
+
+
+
+
 // Prototypes des fonctions de l'analyseur syntaxique
 int est_mot_cle(const char *mot);                      // Vérifie si un lexème est un mot clé comme 'do' ou 'while'
 int est_identificateur(const char *mot);               // Vérifie si un lexème est un identificateur valide
