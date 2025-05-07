@@ -7,4 +7,5 @@ do {
     open("fichier.txt");
     avg(1,2,3,70);
     clear();
+    
 } while (i < 3); // Tant que i est inférieur à 3
