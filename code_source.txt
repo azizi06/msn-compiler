@@ -1,7 +1,10 @@
 do {
-    azizi("azizi","ismail",a,3);
-    char a = "az";
-    printf("tlemcen ");
-    int a = 0;
+    char c = "s";
+    int i = 0;
+    ++i;
+    --i;
+    printf("univ tlemcen");
     open("fichier.txt");
+    avg(1,2,3,70);
+    clear();
 } while (i < 3); // Tant que i est inférieur à 3

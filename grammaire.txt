@@ -18,9 +18,7 @@
 
 
 <type>             ::= "int" | "char"
-
 <expression>       ::= <operand> <operation> <operand> | 
-
 <operation>        ::= "+" | "-" | "*" | "/"
 
 <increment_stmt>   ::=  "++" <identifier> ";"

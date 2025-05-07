@@ -191,7 +191,7 @@ int analyseur_syntaxique(UL *root,ULPile * pile) {
 aff_ulPile(pile);
 //aff_lexims(root);
     if (analyseSyntaxique(pile,root) == 0) {
-        printf("La structure do-while est syntaxiquement correcte yy.\n");
+        printf("La structure do-while est syntaxiquement correcte .\n");
         return 0;
     } else {
         printf("Le programme ne respecte pas la syntaxe attendue pour 'do-while'.\n");
