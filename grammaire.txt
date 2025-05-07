@@ -5,10 +5,18 @@
 <statement>        ::= <increment_stmt>
                      | <decrement_stmt>
                      | <declare_stmt>
-
+                     | <appel_fonction>
 <declare_stmt>     ::= "int" <identifier> "=" <expression> ";"
                         | "char" <identifier> "=" <string> ";"
-                       
+
+
+
+<appel_fonction> ::= <identifier> "("<args> ")" ";"
+<args> ::=  ε |<string> <separateur> <args>|<operand> <separateur> <args>
+<separateur> ::= "," |  ε 
+
+
+
 <type>             ::= "int" | "char"
 
 <expression>       ::= <operand> <operation> <operand> | 

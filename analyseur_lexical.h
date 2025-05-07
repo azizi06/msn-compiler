@@ -85,11 +85,9 @@ void ajouter_token(UL **root, const char *lexeme, int code, int ligne);
 // --- Control / Special ---
 #define CODE_EPSILON             129  // ε (internal use)
 #define FIN_SUITE_UL             999  // #
-#define ERREUR                  -1
+#define ERREUR                  -1 // error
 
-// --- Special Control Codes ---
-#define FIN_SUITE_UL             999  // #
-#define ERREUR                   -1  // Error code
+
 
 // --- Keyword Strings for Lexer (if needed) ---
 #define DO_KEYWORD               "do"
@@ -106,7 +104,7 @@ void ajouter_token(UL **root, const char *lexeme, int code, int ligne);
 #define EQ_OPERATOR              "=="
 #define NEQ_OPERATOR             "!="
 
-#define   NUMBER_OF_TERMINALS          34
+#define   NUMBER_OF_TERMINALS          30
 
 
 #endif // ANALYSEUR_LEXICAL_H

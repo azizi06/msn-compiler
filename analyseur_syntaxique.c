@@ -2,24 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
-// === les non terminaux
 
-#define NT_DO_WHILE         200
-#define NT_STATEMENTS       201
-#define NT_STATEMENT        202
-#define NT_DECLARE_STMT     203
-#define NT_TYPE             204
-#define NT_EXPRESSION       205
-#define NT_OPERAND          206
-#define NT_OPERATION        207
-#define NT_INCREMENT_STMT   208
-#define NT_DECREMENT_STMT   209
-#define NT_CONDITION        210
-#define NT_REL_OP           211
-#define NT_BOOL_OP          212
-
-
-#define NUMBER_OF_NON_TERMINALS  13
 
 
 
@@ -52,36 +35,56 @@ static const int RPs[][10] = {
     /* 24 */ { CODE_GEQ, -1 },
     /* 25 */ { CODE_AND, -1 },
     /* 26 */ { CODE_OR, -1 },
+    // NT_OPERAND
     /* 27 */ {CODE_ID, -1 },
     /* 28 */ {CODE_INT_CONST, -1 },
+    // NT_INC
     /* 29 */ {CODE_PLUSPLUS,CODE_ID ,CODE_PV, -1},
+    // NT_DEC
     /* 30 */ {CODE_MINUSMINUS,CODE_ID ,CODE_PV, -1},
+    // NT_APPEL FONCTION
+    /*31 */ {CODE_ID,CODE_PARENTHESE_OUVRANTE,NT_ARGS,CODE_PARENTHESE_FERMANTE,CODE_PV,-1},
+    // NT_ARGS
+    /*32*/  {CODE_EPSILON,-1},
+    /*33*/ {CODE_STRING,NT_SEPARATEUR,NT_ARGS,-1},
+    /*34*/ {NT_OPERAND,NT_SEPARATEUR,NT_ARGS,-1},
+    // NT_SEPARATEUR
+    /*35*/ {CODE_VIRGULE,-1},
+    /*36*/ {CODE_EPSILON,-1}
+    
+
 
 
 
 };
 
-int Table_DAnalyse[NUMBER_OF_NON_TERMINALS][NUMBER_OF_TERMINALS] = {
+ int Table_DAnalyse[NUMBER_OF_NON_TERMINALS][NUMBER_OF_TERMINALS] = {
     // Columns:                        /*0*/do  /*1*/while  /*2*/id  /*3*/int  /*4*/char  /*5*/;  /*6*/{  /*7*/}  /*8*/(  /*9*/ )  /*10*/=  /*11*/+  /*12*/-  /*13*/ *  /*14*/ /  /*15*/++  /*16*/--  /*17*/==  /*18*/!=  /*19*/<  /*20*/>  /*21*/<=  /*22*/>=  /*23*/&&  /*24*/||  /*25*/int_const  /*26*/string  /*27*/,  /*28*/.
     { /* Row for <do_while> */       /*0*/ 0,    /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
-    { /* Row for <statements> */     /*0*/ 1,    /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ 1,      /*4*/ 1,      /*5*/ ERREUR, /*6*/ 2,      /*7*/ 2,      /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ 1, /*16*/ 1, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
-    { /* Row for <statement> */      /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ 3,      /*3*/ 5,      /*4*/ 5,      /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ 3, /*16*/ 4, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ 3,      /*20*/ 4,      /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
+    { /* Row for <statements> */     /*0*/ ERREUR,    /*1*/ ERREUR, /*2*/ 1, /*3*/ 1,      /*4*/ 1,      /*5*/ ERREUR, /*6*/ 2,      /*7*/ 2,      /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ 1, /*16*/ 1, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
+    { /* Row for <statement> */      /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ 31,      /*3*/ 5,      /*4*/ 5,      /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ 3, /*16*/ 4, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ 3,      /*20*/ 4,      /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
     { /* Row for <declare_stmt> */   /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ 6,      /*4*/ 7,      /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
     { /* Row for <type> */           /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ 7,      /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
     { /* Row for <expression> */     /*0*/ 8,      /*1*/ ERREUR, /*2*/ 9,      /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
     { /* Row for <operand> */        /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ 27,     /*3*/ 12,     /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ 28, /*26*/ ERREUR,     /*27*/ ERREUR, /*28*/ ERREUR },
     { /* Row for <operation> */      /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ 19, /*18*/ 20,     /*19*/ 21,     /*20*/ 22,     /*21*/ 23,     /*22*/ 24,     /*23*/ ERREUR,     /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
     { /* Row for <increment_stmt> */ /*0*/ 17,     /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ 29, /*16*/ 30, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
-    { /* Row for <decrement_stmt> */ /*0*/ 18,     /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
+    { /* Row for <decrement_stmt> */ /*0*/ 18,     /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/  30, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
     { /* Row for <condition> */      /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ 11,     /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ 19,     /*9*/ 20,     /*10*/ 21,     /*11*/ 22,     /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ 11,     /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
     { /* Row for <rel_op> */         /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ 25,     /*3*/ 26,     /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR, /*14*/ ERREUR, /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
-    { /* Row for <bool_op> */        /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ 27,     /*14*/ 28,     /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR }
+    { /* Row for <bool_op> */        /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ 27,     /*14*/ 28,     /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ ERREUR, /*28*/ ERREUR },
+    { /* Row for <appel fonction> */ /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ 31, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ ERREUR, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR,     /*14*/ ERREUR,     /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ 33, /*27*/ ERREUR, /*28*/ ERREUR } , 
+    { /* Row for <args> */           /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ 34, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ 32, /*9*/ 32, /*10*/ 32, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR,     /*14*/ ERREUR,     /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ 34, /*26*/ 33 , /*27*/ ERREUR, /*28*/ ERREUR },
+    { /* Row for <separateur> */     /*0*/ ERREUR, /*1*/ ERREUR, /*2*/ ERREUR, /*3*/ ERREUR, /*4*/ ERREUR, /*5*/ ERREUR, /*6*/ ERREUR, /*7*/ ERREUR, /*8*/ ERREUR, /*9*/ 36, /*10*/ ERREUR, /*11*/ ERREUR, /*12*/ ERREUR, /*13*/ ERREUR,     /*14*/ ERREUR,     /*15*/ ERREUR, /*16*/ ERREUR, /*17*/ ERREUR, /*18*/ ERREUR, /*19*/ ERREUR, /*20*/ ERREUR, /*21*/ ERREUR, /*22*/ ERREUR, /*23*/ ERREUR, /*24*/ ERREUR, /*25*/ ERREUR, /*26*/ ERREUR, /*27*/ 35, /*28*/ ERREUR }
+
 };
 
 
 
 
 int analyseSyntaxique(ULPile* pile, UL* ul) {
+    
+    printf("\n\nTable analyse  14 26 %d",Table_DAnalyse[14][9]);
     printf("\n-----------------------------------PILE-----------------------------------------------");
 
     printf("\nPile: ");
@@ -99,7 +102,7 @@ int analyseSyntaxique(ULPile* pile, UL* ul) {
         UL* e1 = ul;              // Token courant
         UL* e2 = pile->sommet;    // Sommet de la pile
 
-        printf("%d  suite ul %d , pile %d\n", i, e1->Code, e2->Code);
+        printf("%d pile %d  suite ul %d\n", i, e1->Code, e2->Code);
 
         if (e2->Code == CODE_EPSILON) {
             pile = pop_ul(pile);
@@ -184,6 +187,7 @@ int analyseSyntaxique(ULPile* pile, UL* ul) {
 
 
 int analyseur_syntaxique(UL *root,ULPile * pile) {
+
 aff_ulPile(pile);
 //aff_lexims(root);
     if (analyseSyntaxique(pile,root) == 0) {

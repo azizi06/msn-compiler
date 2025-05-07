@@ -18,9 +18,12 @@
 #define NT_CONDITION        210
 #define NT_REL_OP           211
 #define NT_BOOL_OP          212
+#define NT_APPELLE_FONCTION 213
+#define NT_ARGS             214
+#define NT_SEPARATEUR       215
 
 
-#define NUMBER_OF_NON_TERMINALS  13
+#define NUMBER_OF_NON_TERMINALS  16
 
 
 

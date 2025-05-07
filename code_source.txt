@@ -1,7 +1,7 @@
 do {
-   
-    int a = 5;
-    char nom = "azizi"
-    ++a;
-    --a;
+    azizi("azizi","ismail",a,3);
+    char a = "az";
+    printf("tlemcen ");
+    int a = 0;
+    open("fichier.txt");
 } while (i < 3); // Tant que i est inférieur à 3
